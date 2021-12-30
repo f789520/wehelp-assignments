@@ -1,0 +1,98 @@
+* {
+    font-size: 20px;
+}
+
+.top{
+    display:flex
+}
+
+.logo{
+    flex:none;/* 沒有彈性 固定尺寸 */
+    width:100px;
+}
+
+.topright{
+    display: flex;
+    justify-content: flex-end;
+    flex: auto;/* 盡量把空間填滿 */
+}
+
+.item{
+    flex:none;
+    width:60px;
+}
+
+.head{
+    display: flex;
+    background-color: #b7e8ff;
+    font-size: 40px;
+    justify-content:center;/* 左右置中 */
+    align-items:center ;/* 上下置中 */
+    height:300px;
+}
+
+.headtext{
+    text-align: center;
+    font-size: 40px;
+}
+
+/* 放container */
+main{
+    display:flex;
+    flex-wrap:wrap;/* flex-wrap:wrap 換行  當區塊不夠時自動往下擺 */
+    /* background-color: #6495ed; */
+    justify-content:center;/* 容器中左右，置中 */
+    align-items: center ;/* 容器中上下，沒有彈性 固定尺寸，預設 */
+    width:1200px ;
+    margin: auto;
+}
+
+/* 包圖片和Title - 4>2>1 */
+.container{
+    flex:auto;
+    justify-content:center;
+    text-align:center;
+    padding: 5px;
+}
+
+/* 圖片 */
+.Pic{
+    margin: auto;
+    object-fit: cover;
+    flex:auto;
+}
+
+.Title{
+    flex: none;
+    text-align:center;
+    background-color: crimson;
+    justify-content:center;
+}
+
+
+.bur{
+    width: 30px;
+    text-align:center;
+    justify-content:center;
+    align-items: center ;
+    display: none;
+}
+
+@media  (min-width:1200px){
+    .Pic{width: 270px;} }
+
+
+@media  (max-width:1200px){
+    .container{width: 45%;}
+    .main{max-width: 100%;} 
+    .Pic{max-width:100%;} 
+}
+@media screen and (max-width:600px){
+    .container{width: 90%;}
+    .main{max-width: 100%;} 
+    .Pic{max-width:100%;} 
+    .bur{display: block;}
+    .item{display: none;}
+}
+
+
