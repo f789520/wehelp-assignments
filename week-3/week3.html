@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <meta charset="UTF-8"></meta>  
+        <meta name="viewport" content="width=device-width, initial-scale=1,maxium-scale=1"/>
+        <title>Welcome to MyHome </title>
+
+
+        <script>
+ 
+        function getData(){
+            let req=new XMLHttpRequest();
+            req.open("get","https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json")
+            req.onload=function(){ 
+                let obj=JSON.parse(this.responseText);
+                let cc=obj.result.results; 
+                function Viewdata(view,id){
+                    this.stitle=cc[view].stitle;
+                    let x=document.createElement("p");
+                    x.setAttribute("class", "Title");
+                    let t=document.createTextNode(this.stitle); 
+                    x.appendChild(t); 
+                    document.getElementById(id).appendChild(x); 
+                }
+                for(i=0;i<8;i++){
+                    Viewdata(i,"view"+String(i+1));
+                }
+                function Picdata(pic,imgid){
+                    this.pic=cc[pic].file.substring(0,cc[pic].file.toLowerCase().indexOf("jpg")) +"jpg";
+                    let imgTag=document.createElement("img"); 
+                    imgTag.src=this.pic;
+                    imgTag.setAttribute("class", "Pic");
+                    let mm=document.getElementById(imgid);
+                    mm.appendChild(imgTag);
+                }
+                for(j=0;j<8;j++){
+                    Picdata(j,"pic"+String(j+1));
+                }
+            };
+            req.send();
+        }
+        </script>
+        <link href="week3.css" rel="stylesheet">
+    </head>
+<body onload="getData()"  > 
+    <div class="top" > 
+        <div class="logo" >My Website</div>
+        <div  class="topright"  > 
+            <div ><img class="bur" src="hamburger.png" ;></div>
+            <div class="item" >item1</div>
+            <div class="item" >item2</div>
+            <div class="item">item3</div>
+            <div class="item">item4</div>
+        </div>
+        </div>
+    </div > 
+    <div class="head" >
+        <div class="headtext">Welcome to MyHome </div>
+    </div>
+    <main class="main">
+        <div class="container"> 
+            <div id="pic1"></div>
+            <div id="view1"></div>
+        </div>
+
+        <div class="container"> 
+            <div id="pic2" ></div>
+            <div id="view2"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic3" ></div>
+            <div id="view3"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic4" ></div>
+            <div id="view4"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic5" ></div>
+            <div id="view5"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic6" ></div>
+            <div id="view6"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic7" ></div>
+            <div id="view7"></div>
+        </div>
+        <div class="container"> 
+            <div id="pic8" ></div>
+            <div id="view8"></div>
+        </div>
+    </main>
+
+
+</body>
+
+</html>
