@@ -19,6 +19,7 @@ def index():
 @app.route("/signin", methods=["POST"])
 def signin():
     session["save_name"]=request.form["username"]
+    session["save_password"]=request.form["password"]
     if request.form["username"] == cor_username and request.form["password"] == cor_password:
         return redirect("http://127.0.0.1:3000/member")
     elif request.form["username"] == "" or request.form["password"] == "":
@@ -28,11 +29,10 @@ def signin():
 
 @app.route("/member")
 def member():
-    session["save_name"]
-    if session["save_name"]==None:
-        return redirect("http://127.0.0.1:3000/")
-    else:
+    if session["save_name"]=="test" and session["save_password"]=="test":
         return render_template("member_week-4.html")
+    else:
+        return redirect("http://127.0.0.1:3000/")
 
 @app.route("/error")
 def error():
