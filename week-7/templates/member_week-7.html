@@ -53,26 +53,32 @@
         <div style="font-weight:bolder;">查詢會員姓名
         </div>
 
-        <input style=margin:10px;padding:5px; type='text' name='search' id='search'>
+        <input style=margin:10px;padding:5px; type='text' name='username' id='username'>
         <button onclick="getData()">查詢</button>
         <br />
-        <div id='final'></div>
+        <div id="finall"></div>
     </div>
 
     <script>
+        let finall=document.getElementById("finall");
 
         function getData() {
-            const searchElement = document.getElementById('search')
-            const search = searchElement.value;    //https://pjchender.blogspot.com/2015/11/javascript.html
-            fetch("http://127.0.0.1:3000/search?search=" + search)   //發送query string
+            const usernameElement = document.getElementById('username')
+            const username = usernameElement.value;    //https://pjchender.blogspot.com/2015/11/javascript.html
+            fetch("http://127.0.0.1:3000//api/members?username=" + username)   //發送query string
                 .then(function (response) {
                     // console.log(response)
-                    // console.log(search)
-                    return response.text();
+                    // console.log(username)
+                    // return response.text();
+                    return response.json();
                 })
-                .then(function (result) {
-                    document.getElementById("final").innerHTML = result
-                    // console.log(search)
+                .then(function(result) {
+                    // document.getElementById("username").innerHTML = result
+                    console.log(result);
+                    // finall.innerHTML="";
+                    // let username;
+                    // username=result[0]
+                    finall.innerHTML=result.name+" ("+result.username+")"
                 });
         }
     </script>
