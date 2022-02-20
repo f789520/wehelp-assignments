@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -13,8 +12,6 @@ import json
 from json import dumps
 from urllib.parse import parse_qs
 import sqlite3
-
-
 # ------------------------------------MySQL 連線
 mydb = mysql.connector.connect(
     host="127.0.0.1",
@@ -47,7 +44,6 @@ def signin():
     if myresult == None:
         return redirect("http://127.0.0.1:3000/error?message=帳號、或密碼輸入錯誤")
     session["nickname"] = myresult['name']
-
     return redirect("http://127.0.0.1:3000/member")
 
 
@@ -95,33 +91,16 @@ def signup():
     mydb.commit()
     return redirect("http://127.0.0.1:3000/")
 
-# http://127.0.0.1:3000/api/members?username=
 
 @app.route("/api/members")
 def members():
-    username = request.args.get("username")  # 從網站網址列得到要查詢的帳號
-    sql = "SELECT id,name,username FROM member WHERE username='%s'" % (
-        username,)  # 從SQL查詢帳號 , '' 引號拿掉
-    mycursor.execute(sql)
-    myresult = mycursor.fetchone()
-    if myresult == None:  
-        return "{\"data\":null}"
-    # 中文顯示 https://iii.run/archives/98b692d3d018.html
-    return json.dumps(myresult, ensure_ascii=False)
-
-@app.route("/search")
-def search():
-    search = request.args.get('search') #抓到FETCH 送的 string 資料(使用者查詢的輸入框資料)
-    sql = "SELECT name,username FROM member WHERE username='%s'" % (
-        search,)
+    username = request.args.get("username")
+    sql = "SELECT id,name,username FROM member WHERE username='%s'" % (username,)
     mycursor.execute(sql)
     myresult = mycursor.fetchone()
     if myresult == None:
-        return "查無姓名"
- 
-    search = json.dumps(myresult, ensure_ascii=False)
-    data = json.loads(search)
-    search_data = data.get("name")+" ("+data.get("username")+")"
-    return search_data
+        return "{\"data\":null}"
+    return json.dumps(myresult, ensure_ascii=False)
+
 
 app.run(port=3000)
